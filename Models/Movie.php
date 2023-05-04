@@ -8,8 +8,9 @@ class Movie
     public $runtime;
     public $procution_house;
     public $cover;
+    public $casts;
 
-    public function __construct($title, $original_language, $release_date, $genres, $runtime, $procution_house, $cover)
+    public function __construct($title, $original_language, $release_date, $genres, $runtime, $procution_house, $casts, $cover)
     {
         $this->title = $title;
         $this->original_language = $original_language;
@@ -17,6 +18,7 @@ class Movie
         $this->genres = $genres;
         $this->runtime = $runtime;
         $this->procution_house = $procution_house;
+        $this->casts = $casts;
         $this->cover = $cover;
     }
 
@@ -44,6 +46,18 @@ class Movie
             }
         }
         return $genres;
+    }
+
+    public function getCast()
+    {
+        $result = '';
+        foreach ($this->casts as $index => $cast) {
+            $result .= $cast;
+            if ($index != count($this->casts) - 1) {
+                $result .= ", ";
+            }
+        }
+        return $result;
     }
     public function getRuntime()
     {

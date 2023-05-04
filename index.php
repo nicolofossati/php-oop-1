@@ -41,6 +41,10 @@ require __DIR__ . '/db.php';
                                 <?php echo $movie->getGenres(); ?>
                             </p>
 
+                            <p class="card-text">Cast:
+                                <?php echo $movie->getCast(); ?>
+                            </p>
+
                             <p class="card-text">
                                 Prodution house:
                                 <?php echo $movie->procution_house ?>
