@@ -34,7 +34,14 @@ class Movie
     }
     public function getGenres()
     {
-        return $this->genres;
+        $genres = '';
+        foreach ($this->genres as $index => $genre) {
+            $genres .= $genre;
+            if ($index != count($this->genres) - 1) {
+                $genres .= ", ";
+            }
+        }
+        return $genres;
     }
     public function getRuntime()
     {
@@ -71,13 +78,24 @@ class Movie
     {
         $this->procution_house = $procution_house;
     }
-}
 
-$ciao = new Movie('ciao', 'english', 2015, 'horror', 125, 'WB');
-echo $ciao->getTitle();
-?></br>
-<?php
-$ciao->setTitle('ciaoo');
-echo $ciao->getTitle();
+    public function printMovie()
+    {
+        echo "Title: " . $this->title . "</br>";
+        echo "Original language: " . $this->original_language . "</br>";
+        echo "Release date: " . $this->release_date . "</br>";
+        echo "Genres: " . $this->getGenres() . "</br>";
+        echo "Runtime: " . $this->runtime . "</br>";
+        echo "Procution house: " . $this->procution_house . "</br>";
+    }
+}
+$ciaoGenres = ['horror', 'triller'];
+$ciao = new Movie('ciao', 'english', 2015, $ciaoGenres, 125, 'WB');
+$altroFilmGenres = ['comedy'];
+$altroFilm = new Movie('Altro Film', 'italian', 2023, $altroFilmGenres, 97, '20C');
+
+echo $ciao->printMovie();
+echo "</br>";
+echo $altroFilm->printMovie();
 
 ?>
