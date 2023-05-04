@@ -1,101 +1,71 @@
 <?php
-class Movie
-{
-    public $title;
-    public $original_language;
-    public $release_date;
-    public $genres;
-    public $runtime;
-    public $procution_house;
+require __DIR__ . '/Models/Movie.php';
+require __DIR__ . '/db.php';
 
-    public function __construct($title, $original_language, $release_date, $genres, $runtime, $procution_house)
-    {
-        $this->title = $title;
-        $this->original_language = $original_language;
-        $this->release_date = $release_date;
-        $this->genres = $genres;
-        $this->runtime = $runtime;
-        $this->procution_house = $procution_house;
-    }
 
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    public function getOriginal_language()
-    {
-        return $this->original_language;
-    }
-
-    public function getRelease_date()
-    {
-        return $this->release_date;
-    }
-    public function getGenres()
-    {
-        $genres = '';
-        foreach ($this->genres as $index => $genre) {
-            $genres .= $genre;
-            if ($index != count($this->genres) - 1) {
-                $genres .= ", ";
-            }
-        }
-        return $genres;
-    }
-    public function getRuntime()
-    {
-        return $this->runtime;
-    }
-    public function getProcution_house()
-    {
-        return $this->procution_house;
-    }
-
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    public function setOriginal_language($original_language)
-    {
-        $this->original_language = $original_language;
-    }
-
-    public function setRelease_date($release_date)
-    {
-        $this->release_date = $release_date;
-    }
-    public function setGenres($genres)
-    {
-        $this->genres = $genres;
-    }
-    public function setRuntime($runtime)
-    {
-        $this->runtime = $runtime;
-    }
-    public function setProcution_house($procution_house)
-    {
-        $this->procution_house = $procution_house;
-    }
-
-    public function printMovie()
-    {
-        echo "Title: " . $this->title . "</br>";
-        echo "Original language: " . $this->original_language . "</br>";
-        echo "Release date: " . $this->release_date . "</br>";
-        echo "Genres: " . $this->getGenres() . "</br>";
-        echo "Runtime: " . $this->runtime . "</br>";
-        echo "Procution house: " . $this->procution_house . "</br>";
-    }
-}
-$ciaoGenres = ['horror', 'triller'];
-$ciao = new Movie('ciao', 'english', 2015, $ciaoGenres, 125, 'WB');
-$altroFilmGenres = ['comedy'];
-$altroFilm = new Movie('Altro Film', 'italian', 2023, $altroFilmGenres, 97, '20C');
-
-echo $ciao->printMovie();
-echo "</br>";
-echo $altroFilm->printMovie();
 
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <title>Movies</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <?php
+        foreach ($movie_db as $key => $movie) { ?>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="<?php echo $movie->cover ?>" class="img-fluid rounded-start">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title">
+                                <?php echo $movie->title ?>
+                            </h2>
+                            <p class="card-text">Genres:
+                                <?php echo $movie->getGenres(); ?>
+                            </p>
+
+                            <p class="card-text">
+                                Prodution house:
+                                <?php echo $movie->procution_house ?>
+                            </p>
+                            <p class="card-text"><small class="text-body-secondary">Original language:
+                                    <?php echo $movie->original_language ?>, Duration:
+                                    <?php echo $movie->runtime ?>m
+                                </small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+
+        ?>
+
+
+    </div>
+
+
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
